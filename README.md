@@ -2,53 +2,23 @@
 
 **AI-powered computer vision workspace for image and video analysis.**
 
-VisionForge is a software-first computer vision platform built around a FastAPI backend and a Next.js frontend. The first milestone is a working image object-detection pipeline using YOLO and OpenCV, with video analysis and additional vision tasks added incrementally.
+VisionForge is a software-first computer vision platform built around a FastAPI backend and a Next.js frontend. The current milestone supports image detection and frame-by-frame video detection using YOLO and OpenCV.
 
-## MVP
+## Current features
 
-- Upload an image
-- Run YOLO object detection
-- Return an annotated image
-- Show detected classes, confidence and object counts
-- Keep inference logic isolated from the API layer
-- Provide a clean web UI
+- Image upload and YOLO object detection
+- Annotated image results
+- Detection confidence and object counts
+- Video upload and frame-by-frame YOLO detection
+- Annotated video playback
+- Basic video metadata and class counts
 
-## Planned stack
+## Stack
 
-- **Frontend:** Next.js, TypeScript, Tailwind CSS
+- **Frontend:** Next.js, TypeScript
 - **Backend:** Python, FastAPI
 - **Computer Vision:** Ultralytics YOLO, PyTorch, OpenCV
 - **API:** REST
-- **Testing:** Pytest
-
-## Repository structure
-
-```
-visionforge/
-├── backend/
-│   ├── app/
-│   │   ├── api/
-│   │   ├── vision/
-│   │   └── main.py
-│   ├── tests/
-│   └── requirements.txt
-├── frontend/
-│   ├── app/
-│   ├── package.json
-│   └── tsconfig.json
-└── README.md
-```
-
-## Development status
-
-- [x] Repository foundation
-- [x] FastAPI health endpoint
-- [x] YOLO image-detection service
-- [ ] Image upload UI
-- [ ] End-to-end image detection
-- [ ] Video detection and tracking
-- [ ] Results dashboard
-- [ ] Tests and deployment
 
 ## Local development
 
@@ -59,9 +29,6 @@ cd backend
 python -m venv .venv
 # Windows:
 .venv\Scripts\activate
-# macOS/Linux:
-# source .venv/bin/activate
-
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
@@ -78,5 +45,17 @@ npm run dev
 ```
 
 Frontend: http://localhost:3000
+
+## Development status
+
+- [x] Repository foundation
+- [x] Image detection
+- [x] Video detection
+- [ ] Object tracking
+- [ ] Live webcam detection
+- [ ] Results dashboard
+- [ ] Exportable reports
+- [ ] Custom electronics-component model
+- [ ] Tests and deployment
 
 > The first version is intentionally software-only. No electronics purchase is required.
