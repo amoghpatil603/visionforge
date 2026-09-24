@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import base64
 from functools import lru_cache
+from io import BytesIO
 from typing import Any
 
+import cv2
+import numpy as np
 from PIL import Image
 from ultralytics import YOLO
 
@@ -39,6 +43,14 @@ def detect_image(image: Image.Image) -> dict[str, Any]:
             )
             counts[class_name] = counts.get(class_name, 0) + 1
 
+    annotated_bgr = result.plot()
+    annotated_rgb = cv2.cvtColor(annotated_bgr, cv2.COLOR_BGR2RGB)
+    annotated_image = Image.fromarray(annotated_rgb)
+
+    buffer = BytesIO()
+    annotated_image.save(buffer, format="JPEG", quality=90)
+    image_base64 = base64.b64encode(buffer.getvalue()).decode("ascii")
+
     return {
         "model": "yolo11n",
         "image": {
@@ -48,4 +60,5 @@ def detect_image(image: Image.Image) -> dict[str, Any]:
         "detections": detections,
         "counts": counts,
         "total_objects": len(detections),
+        "annotated_image": f"data:image/jpeg;base64,{image_base64}",
     }
